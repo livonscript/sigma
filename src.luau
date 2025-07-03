@@ -26,12 +26,6 @@ export type Connection<In...> = {
       _once      : boolean
 }
 
---[[
-export type SigmaThread<In...> = {
-      Routine    : (In...) -> (),
-      _uuid      : string,
-}
-]]
 
 export type Sigma<Input...> = {
       Fire    : (self : any, Input...) -> (),
