@@ -12,7 +12,6 @@
 
        🗒️ Creation Date : 2025-07-03
        📜 Last Updated  : 2025-07-03
-       ⚔️ Copyright (c) @ Livon Entertainment 2025
 
        Sigma @1.0.0
 ]]
@@ -25,7 +24,6 @@ export type Connection<In...> = {
       _uuid      : string,
       _once      : boolean
 }
-
 
 export type Sigma<Input...> = {
       Fire    : (self : any, Input...) -> (),
@@ -41,7 +39,7 @@ export type Sigma<Input...> = {
 }
 
 export type Constructor = {
-      New  : <I, O>() -> Sigma<I, O>,
+      New  : <I...>() -> Sigma<I...>,
       --Wrap : <I, O>(Signal : RBXScriptSignal) -> Sigma<I,O>,
      
       __index : Constructor
@@ -51,13 +49,15 @@ local Sigma = {} :: Constructor
 Sigma.__index = Sigma
 
 
-function Sigma.New <Input, Output>()
-      local self = setmetatable({}, Sigma) :: Sigma<Input, Output>
+function Sigma.New <I...>()
+      local self= setmetatable({}, Sigma)
+      
+ 
       
       self.__cache   = {}
       self.__waiting = {}
       
-      return self
+      return ( self :: any ) :: any
 end
 
 function Sigma:Fire(... : any)
@@ -97,6 +97,8 @@ function Sigma:Connect(Out : any )
       end
       
       _self.__cache[new_uuid] = NewConnection
+      
+      return NewConnection
 end
 
 
@@ -118,6 +120,8 @@ function Sigma:Once(Out : any )
       end
 
       _self.__cache[new_uuid] = NewConnection
+      
+      return NewConnection
 end
 
 function Sigma:Wait()
@@ -146,5 +150,6 @@ function Sigma:Destroy ()
       
       table.clear(self :: any)
 end
+
 
 return Sigma
