@@ -11,9 +11,9 @@
                                                                          
 
        🗒️ Creation Date : 2025-07-03
-       📜 Last Updated  : 2025-07-03
+       📜 Last Updated  : 2025-07-28
 
-       Sigma @1.0.0
+       Sigma @1.1.0
 ]]
 
 local HttpService = game:GetService('HttpService')
